@@ -13,7 +13,7 @@ type Numbers struct {
 	Num2 int `json:"number2"`
 }
 type Response struct {
-	result int `json:"result"`
+	result interface{} `json:"result"`
 }
 
 func Addition(c echo.Context) error {
@@ -22,8 +22,9 @@ func Addition(c echo.Context) error {
 	if err := c.Bind(u); err != nil {
 		return err
 	}
+
 	result := u.Num1 + u.Num2
-	fmt.Println("The Addirtion of 2 numbers is=", result)
+	fmt.Println("The Addition of 2 numbers is=", result)
 
 	return c.JSON(http.StatusOK, result)
 }
@@ -44,7 +45,7 @@ func Multiplication(c echo.Context) error {
 	if err := c.Bind(u); err != nil {
 		return err
 	}
-	result := u.Num1 * u.Num2
+	result := u.Num1 + u.Num2
 	fmt.Println("The Multiplication of 2 numbers is=", result)
 
 	return c.JSON(http.StatusOK, result)
@@ -79,8 +80,8 @@ func Modulus(c echo.Context) error {
 	if err := c.Bind(u); err != nil {
 		return err
 	}
-	result := u.Num1 % u.Num2
 
+	result := u.Num1 % u.Num2
 	fmt.Println("The Modulus  of 2 numbers is=", result)
 
 	return c.JSON(http.StatusOK, result)
@@ -91,10 +92,10 @@ func main() {
 
 	e.POST("/addition", Addition)
 	e.POST("/subtraction", Subtraction)
-	e.POST("/multiplication", Multiplication)
+	e.POST("/multipication", Multiplication)
 	e.POST("/division", Division)
-	e.POST("/", SquareRoot)
-	e.POST("/", Modulus)
+	e.POST("/squareroot", SquareRoot)
+	e.POST("/modulus", Modulus)
 
-	e.Start(":8006")
+	e.Start(":4002")
 }
