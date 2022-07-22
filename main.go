@@ -45,7 +45,7 @@ func Multiplication(c echo.Context) error {
 	if err := c.Bind(u); err != nil {
 		return err
 	}
-	result := u.Num1 + u.Num2
+	result := u.Num1 * u.Num2
 	fmt.Println("The Multiplication of 2 numbers is=", result)
 
 	return c.JSON(http.StatusOK, result)
